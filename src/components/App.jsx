@@ -19,20 +19,19 @@ export class App extends Component {
     };
 
     onFormSubmit = data => {
-        if (
-            this.state.contacts.some(
-                value => value.name.toLowerCase() === data.name.toLowerCase()
-            )
-        ) {
+        const isNameExist = this.state.contacts.find(
+            value => value.name.toLowerCase() === data.name.toLowerCase()
+        );
+        const isNumberExist = this.state.contacts.find(
+            value => value.number === data.number
+        );
+        if (isNameExist) {
             alert(`${data.name} is already in contacts.`);
             return;
         }
-        if (this.state.contacts.some(value => value.number === data.number)) {
-            const findContact = this.state.contacts.find(
-                option => option.number === data.number
-            );
+        if (isNumberExist) {
             alert(
-                `${data.number} is already in contacts as ${findContact.name}.`
+                `${data.number} is already in contacts as ${isNumberExist.name}.`
             );
             return;
         }
